@@ -208,7 +208,7 @@ jobs:
         elif [[ "${{ github.event.inputs.BASE_PROJECT }}" == "RisingOS 15 Revived" ]] && [[ "${{ github.event.inputs.BUILD_DIFFERENT_ROM }}" == "echo 'Build Starting!'" ]]; then
             LUNCH="riseup ${{ github.event.inputs.PRODUCT_NAME }} ${{ github.event.inputs.BUILD_TYPE }}"
         else
-            LUNCH="breakfast ${{ github.event.inputs.PRODUCT_NAME }} ${{ github.event.inputs.BUILD_TYPE }}"
+            LUNCH="axion ${{ github.event.inputs.PRODUCT_NAME }} gms pico"
         fi
 
           if [[ "${{ github.event.inputs.LOCAL_MANIFEST }}" =~ \.xml(/)?$ ]]; then
@@ -537,6 +537,7 @@ jobs:
 
         # Build the ROM
         $LUNCH && \
+        axionSync && \
         make installclean && \
         ${{ github.event.inputs.BUILD_COMMAND }}"
       timeout-minutes: 1440
