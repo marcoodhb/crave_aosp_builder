@@ -528,6 +528,7 @@ jobs:
           /opt/crave/resync.sh
         fi && \
 
+        rm -f frameworks/base/packages/SystemUI/res/values-ru/clover_strings.xml && \
         # Set up build environment
         export BUILD_USERNAME=${{ github.actor }} ; \
         export BUILD_HOSTNAME=crave ; \
