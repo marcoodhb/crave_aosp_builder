@@ -528,7 +528,9 @@ jobs:
           /opt/crave/resync.sh
         fi && \
 
-        rm -f frameworks/base/packages/SystemUI/res/values-ru/clover_strings.xml && \
+        (cd packages/apps/Settings && git revert --no-edit --no-commit 29f5e3a) || { echo \"Revert failed in Settings, aborting build.\"; exit 1; } && \
+        (cd frameworks/base && git revert --no-edit --no-commit d454403) || { echo \"Revert failed in frameworks/base, aborting build.\"; exit 1; } && \
+        echo \" reverts applied successfully.\" && \
         # Set up build environment
         export BUILD_USERNAME=${{ github.actor }} ; \
         export BUILD_HOSTNAME=crave ; \
@@ -540,7 +542,10 @@ jobs:
         # Build the ROM
         $LUNCH && \
         make installclean && \
-        ${{ github.event.inputs.BUILD_COMMAND }}"
+        ${{ github.event.inputs.BUILD_COMMAND }}; \
+        (cd packages/apps/Settings && git reset --hard HEAD) || true && \
+        (cd frameworks/base && git reset --hard HEAD) || true"
+        
       timeout-minutes: 1440
 
       # Send Build 'status' notification (Success)
