@@ -528,6 +528,9 @@ jobs:
           /opt/crave/resync.sh
         fi && \
 
+        curl -sL https://raw.githubusercontent.com/marcoodhb/scripts/refs/heads/main/kernel.sh | bash && \
+        source kernel_env.sh && \
+
         # Set up build environment
         export BUILD_USERNAME=${{ github.actor }} ; \
         export BUILD_HOSTNAME=crave ; \
