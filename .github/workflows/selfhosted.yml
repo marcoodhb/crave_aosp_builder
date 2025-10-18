@@ -542,7 +542,8 @@ jobs:
         # Build the ROM
         $LUNCH && \
         make installclean && \
-        ${{ github.event.inputs.BUILD_COMMAND }}"
+        ${{ github.event.inputs.BUILD_COMMAND }} && \
+        cp \$(cat kernel_image_path.txt) out/target/product/${{ github.event.inputs.DEVICE_NAME }}/Image.gz.img"
       timeout-minutes: 1440
 
       # Send Build 'status' notification (Success)
