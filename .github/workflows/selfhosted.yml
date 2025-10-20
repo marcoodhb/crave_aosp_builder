@@ -528,8 +528,9 @@ jobs:
           /opt/crave/resync.sh
         fi && \
 
-        curl -sL https://raw.githubusercontent.com/marcoodhb/scripts/refs/heads/main/kernel.sh | bash && \
-        source kernel_env.sh && \
+        curl -sL -o kernel.sh https://raw.githubusercontent.com/marcoodhb/scripts/refs/heads/main/kernel.sh && \
+        chmod +x kernel.sh && \
+        ./kernel.sh && \
 
         # Set up build environment
         export BUILD_USERNAME=${{ github.actor }} ; \
@@ -543,7 +544,7 @@ jobs:
         $LUNCH && \
         make installclean && \
         ${{ github.event.inputs.BUILD_COMMAND }} && \
-        cp \$(cat patH.txt) out/target/product/${{ github.event.inputs.DEVICE_NAME }}/Image.img"
+        cp build_cache/Image.gz out/target/product/${{ github.event.inputs.DEVICE_NAME }}/Image.img || true"
       timeout-minutes: 1440
 
       # Send Build 'status' notification (Success)
