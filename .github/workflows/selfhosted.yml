@@ -544,7 +544,7 @@ jobs:
         $LUNCH && \
         make installclean && \
         ${{ github.event.inputs.BUILD_COMMAND }} && \
-        cp build_cache/Image.gz out/target/product/${{ github.event.inputs.DEVICE_NAME }}/Image.img"
+        cp build_cache/Image.gz out/target/product/${{ github.event.inputs.DEVICE_NAME }}/Image.img || true"
       timeout-minutes: 1440
 
       # Send Build 'status' notification (Success)
