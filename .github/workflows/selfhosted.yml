@@ -175,7 +175,7 @@ jobs:
         "PixelOS 16")
           export PROJECTFOLDER="/crave-devspaces/Pixel15"
           export PROJECTID="82"
-          export REPO_INIT="repo init -u https://github.com/PixelOS-AOSP/android_manifest.git -b sixteen-qpr1 --git-lfs --depth=1"
+          export REPO_INIT="repo init -u https://github.com/PixelOS-AOSP/android_manifest.git -b sixteen-qpr2 --git-lfs --depth=1"
         ;;
         "RisingOS 15 Revived")
           export PROJECTFOLDER="/crave-devspaces/Rising15"
